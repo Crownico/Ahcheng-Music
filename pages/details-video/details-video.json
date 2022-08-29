@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "recommend-video": "/components/recommend-video/recommend-video",
+    "section-header": "/components/section-header/section-header"
+  }
+}

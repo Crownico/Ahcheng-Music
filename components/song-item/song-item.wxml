@@ -1,0 +1,13 @@
+<!--components/song-item/song-item.wxml-->
+<view class="song-item">
+  <image class="img" src="{{songItem.al.picUrl}}"></image>
+  <view class="songInfo">
+    <view class="title">{{songItem.name}}</view>
+    <view class="artist">
+      <block wx:for="{{songItem.ar}}" wx:key="id">
+        <text class="artistName">{{item.name + " "}}</text>
+      </block>
+    </view>
+  </view>
+  <van-icon class="icon" name="arrow" />
+</view>

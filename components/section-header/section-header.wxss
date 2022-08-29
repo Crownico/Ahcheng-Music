@@ -1,0 +1,18 @@
+/* components/section-header/section-header.wxss */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+.more {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #A8A8A8;
+}
+.more .icon {
+  font-size: 30rpx;
+}

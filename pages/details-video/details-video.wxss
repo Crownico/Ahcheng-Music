@@ -1,0 +1,30 @@
+/* pages/details-video/details-video.wxss */
+.video-item {
+  width: 100%;
+}
+
+.mv-info {
+  padding: 20rpx;
+  margin-bottom: 35rpx;
+}
+.mv-name {
+  padding-bottom: 20rpx;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+.mv-artistName {
+  padding-bottom: 10rpx;
+  font-size: 30rpx;
+}
+.play-info {
+  font-size: 20rpx;
+  color: #0008;
+}
+
+.recommend {
+  padding: 0 20rpx;
+}
+
+.recommend-mv {
+  padding-top: 26rpx;
+}

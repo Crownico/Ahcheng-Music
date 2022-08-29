@@ -1,0 +1,15 @@
+<!--components/recommend-video/recommend-video.wxml-->
+<wxs src="../../utils/format.wxs" module="fmt"></wxs>
+<view class="recommend-video-item">
+  <view class="cover-img">
+    <image class="img" src="{{remdvideoItem.coverUrl}}" mode="widthFix"></image>
+    <view class="video-duration">{{fmt.formatTime(remdvideoItem.durationms)}}</view>
+  </view>
+  <view class="video-info">
+    <view class="title">{{remdvideoItem.title}}</view>
+    <view class="artistName">{{remdvideoItem.creator[0].userName}}</view>
+    <view class="play-info">
+      <view class="playCount">{{fmt.formatCount(remdvideoItem.playTime)}}</view>
+    </view>
+  </view>
+</view>

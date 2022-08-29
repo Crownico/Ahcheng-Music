@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Ahcheng Music",
+  "usingComponents": {
+    "van-search": "@vant/weapp/search/index",
+    "section-header": "/components/section-header/section-header",
+    "song-item": "/components/song-item/song-item"
+  }
+}

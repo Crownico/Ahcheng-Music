@@ -1,0 +1,59 @@
+/* components/recommend-video/recommend-video.wxss */
+.recommend-video-item {
+  display: flex;
+  padding-bottom: 20rpx;
+  height: 161rpx;
+}
+.cover-img {
+  position: relative;
+  /* width: 400rpx; */
+  width: 40%;
+  
+}
+.cover-img .img{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 8rpx;
+}
+.video-duration {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 6rpx 6rpx 0;
+  border-radius: 5rpx;
+  font-size: 25rpx;
+  color: #fff9;
+  background-color: #0005;
+}
+
+.video-info {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  padding-left: 15rpx;
+}
+
+.video-info .title{
+  
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.video-info .artistName {
+  position: absolute;
+  bottom: 35rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+.play-info {
+  position: absolute;
+  bottom: 0;
+  font-size: 20rpx;
+  color: #0008;
+}
+
+
+
