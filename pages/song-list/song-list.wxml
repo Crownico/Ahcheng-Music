@@ -1,2 +1,24 @@
 <!--pages/song-list/song-list.wxml-->
-<text>pages/song-list/song-list.wxml</text>
+<!-- 歌曲列表 -->
+<song-list-item itemData="{{songsList}}" wx:if="{{songsList.length}}"></song-list-item>
+<song-list-item itemData="{{newRanking}}" wx:if="{{newRanking.length}}"></song-list-item>
+<song-list-item itemData="{{originRanking}}" wx:if="{{originRanking.length}}"></song-list-item>
+<song-list-item itemData="{{upRanking}}" wx:if="{{upRanking.length}}"></song-list-item>
+<view wx:if="{{songsList.length}}">hhh</view>
+<!-- 歌单歌曲列表 -->
+<view class="song-menu">
+  <view class="song-menu-info">
+    <image class="img" src="{{songMenu.coverImgUrl}}" mode="widthFix"></image>
+    <view class="right">
+      <view class="name">{{songMenu.name}}</view>
+      <view class="creator">
+        <image class="avatar" src="{{songMenu.creator.avatarUrl}}" mode="widthFix"></image>
+        <text class="creator-name">{{songMenu.creator.nickname}}</text>
+      </view>
+      <view class="description">{{songMenu.description}}</view>
+    </view>
+  </view>
+  <image class="bg-img" src="{{songMenu.coverImgUrl}}" mode="aspectFill"></image>
+  <view class="mask"></view>
+</view>
+<song-list-item itemData="{{songMenu.tracks}}"></song-list-item>

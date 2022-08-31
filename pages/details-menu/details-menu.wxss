@@ -1,0 +1,28 @@
+/* pages/details-menu/details-menu.wxss */
+.header {
+  margin: 24rpx;
+}
+
+.songMenu {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.card {
+  width: 45%;
+  padding-bottom: 20rpx;
+}
+.card .img{
+  width: 100%;
+  border-radius: 16rpx;
+}
+.card .name {
+  font-size: 26rpx;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

@@ -1,0 +1,18 @@
+<!--components/rank-song/rank-song.wxml-->
+<wxs src="/utils/data-handler.wxs" module="dataHandler"></wxs>
+
+<view class="rank-song">
+  <view class="song">
+    <block wx:for="{{dataHandler.arrSlice(itemData.tracks, 0, 3)}}" wx:key="id">
+      <view class="song-item" bindtap="onClickRank">
+        <image class="song-img" src="{{item.al.picUrl}}" mode="widthFix"></image>
+        <view class="song-info">
+          <text class="index">{{index+1}} </text>
+          <text class="song-name">{{item.name}} </text>
+          <text class="artist">- {{item.ar[0].name}} </text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <image class="img" src="{{itemData.coverImgUrl}}" mode="widthFix"></image>
+</view>

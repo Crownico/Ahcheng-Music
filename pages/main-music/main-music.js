@@ -1,23 +1,50 @@
-import { getMusicBannerReq, getRecommendSongReq } from "../../services/music"
+import { getMusicBannerReq, getRecommendSongReq, getSongMenuListReq } from "../../services/music"
 import {querySelect} from "../../utils/element-computed"
+import recommendSong  from "../../store/recommendSong";
+import rankSong from "../../store/rankSong";
 
 Page({
-
   data: {
     musicBannerList: [],
-    songList: []
+    songList: [],
+    songMenuData: [],
+    songMenuHotData: [],
+    rankSongObj: {
+      newRanking: {},
+      originRanking: {},
+      upRanking:{}
+    }
   },
   onLoad(options) {
     // 1. 获取轮播banner图
     this.getMusicBanner();
+
     // 2. 获取推荐歌曲
-    this.getRecommendSong(19723756)
+    //  2.1 监听全局状态管理中的数据变化
+    recommendSong.onState("recommendSongList", (value) => {
+      this.setData({songList: value.slice(0, 4)})
+    });
+    //  2.2 发送actions
+    recommendSong.dispatch("getRecommendSong")
+
+    // 3. 请求推荐歌单
+    this.getRecSongMenuList("流行")
+
+    // 4. 获取排行榜歌曲
+    this.getRankSong()
   },
   async getMusicBanner() {
     const res = await getMusicBannerReq();
     this.setData({musicBannerList: res.banners})
   },
-
+  async getRecSongMenuList(cat) {
+    // 热门歌单
+    const res1 = await getSongMenuListReq();
+    this.setData({songMenuData: res1.playlists.slice(0, 6)})
+    // 推荐歌单
+    const res2 = await getSongMenuListReq(cat);
+    this.setData({songMenuHotData: res2.playlists.slice(0, 6)})
+  },
   // 点击搜索框跳转
   onSearchClick(){
     wx.navigateTo({
@@ -37,57 +64,35 @@ Page({
   // 点击更多
   onMoreClick() {
     wx.navigateTo({
-      url: "/pages/song-list/song-list"
+      url: "/pages/song-list/song-list?type=recommendSong"
     })
   },
-  // 推荐歌曲
-  async getRecommendSong(id) {
-    const res = await getRecommendSongReq(id);
-    this.setData({songList: res.playlist.tracks.slice(0, 6)})
+  onMoreMenuClick() {
+    wx.navigateTo({
+      url: '/pages/details-menu/details-menu',
+    })
   },
-  onReady() {
-
+  // 获取排行榜歌曲
+  getRankSong() {
+    // 1. 监听全局管理的榜单数据
+    rankSong.onState("newRanking", (value) => {
+      this.setData({"rankSongObj.newRanking": value})
+    })  
+    rankSong.onState("originRanking", (value) => {
+      this.setData({"rankSongObj.originRanking": value})
+    })  
+    rankSong.onState("upRanking", (value) => {
+      this.setData({"rankSongObj.upRanking": value})
+    })  
+    // 2. 调用 action 发送请求
+    rankSong.dispatch("getRankSong")
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  // 点击巅峰榜
+  onClickRank(event) {
+    const type = event.currentTarget.dataset.index;
+    // console.log(type);
+    wx.navigateTo({
+      url: `/pages/song-list/song-list?type=${type}`,
+    })
   }
 })

@@ -1,0 +1,32 @@
+/* components/section-songMenu/section-songMenu.wxss */
+.section-songMenu {
+  margin-top: 30rpx;
+}
+.song-menu {
+  padding-top: 20rpx;
+  height: 300rpx;
+  /* margin-left: -10rpx; */
+}
+.song-menu .list {
+  display: flex;
+  width: 100%;
+}
+.card {
+  width: 220rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+.card .img {
+  width: 220rpx;
+  border-radius: 16rpx;
+}
+/* 文字只显示两行，超过部分为省略号 */
+.card .name {
+  font-size: 26rpx;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

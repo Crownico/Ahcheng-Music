@@ -17,3 +17,18 @@ page {
 .recommend-song {
   margin-top: 8rpx;
 }
+
+.recommend-songMenu, .hot-songMenu {
+  padding-top: 14rpx;
+}
+/* .rank {
+  margin-top: 20rpx;
+} */
+
+/* 巅峰榜 */
+.rank {
+  padding-top: 30rpx;
+}
+.rank .rank-title {
+  padding-bottom: 16rpx;
+}

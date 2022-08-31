@@ -1,0 +1,49 @@
+/* components/rank-song/rank-song.wxss */
+.rank-song {
+  display: flex;
+  justify-content: space-between;
+  
+  padding: 16rpx 0;
+}
+.song {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  width: 70%;
+  /* margin-right: 10rpx; */
+  font-size: 28rpx;
+
+}
+.song-item {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+.song-item .song-info {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.song .song-img {
+  width: 60rpx;
+  border-radius: 10rpx;
+}
+.song .index {
+  font-size: 32rpx;
+  font-weight: 550;
+  /* font-style: italic; */
+  padding: 0 20rpx;
+}
+.song .song-name {
+  font-weight: 550;
+}
+.song .artist {
+  font-size: 24rpx;
+  color: #999;
+  
+}
+.img {
+  width: 30%;
+}

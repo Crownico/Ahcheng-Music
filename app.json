@@ -4,7 +4,8 @@
     "pages/main-video/main-video",
     "pages/details-video/details-video",
     "pages/details-search/details-search",
-    "pages/song-list/song-list"
+    "pages/song-list/song-list",
+    "pages/details-menu/details-menu"
   ],
   "window": {
     "backgroundTextStyle": "light",

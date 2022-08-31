@@ -1,0 +1,25 @@
+<!--components/section-songMenu/section-songMenu.wxml-->
+<view class="section-songMenu">
+
+  <view class="header">
+    <section-header title="{{title}}" bind:onMoreClick="onMoreClick"></section-header>
+  </view>
+
+  <view class="song-menu">
+    <scroll-view
+        class="list"
+        scroll-x 	
+        enable-flex	
+        enable-passive
+        enhanced
+        show-scrollbar="true"
+        >
+      <block wx:for="{{songMenu}}" wx:key="id">
+          <view class="card" bindtap="onClickSongMenu" data-song-menu-id="{{item.id}}">
+            <image class="img" src="{{item.coverImgUrl}}" mode="widthFix"></image>
+            <view class="name">{{item.name}}</view>
+          </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

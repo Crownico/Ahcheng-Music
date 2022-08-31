@@ -18,3 +18,22 @@ export function getRecommendSongReq(id) {
     }
   })
 }
+
+// 请求推荐歌单（全品类）
+export function getSongMenuListReq(cat = "全部", limit = 6, offset = 0) {
+  return ddRequest.get({
+    url: "/top/playlist",
+    data: {
+      cat,
+      limit,
+      offset
+    }
+  })
+}
+
+// 请求歌单类别
+export function getSongMenuTagReq() {
+  return ddRequest.get({
+    url: "/playlist/hot"
+  })
+}

@@ -2,6 +2,7 @@
 .section-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8rpx;
 }
 .title {
   font-size: 36rpx;

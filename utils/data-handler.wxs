@@ -1,0 +1,8 @@
+// 裁剪数组
+function arrSlice(arr, index = 0, end = arr.length) {
+  return arr.slice(index, end)
+}
+
+module.exports = {
+  arrSlice: arrSlice
+}

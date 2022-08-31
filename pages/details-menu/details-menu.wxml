@@ -1,0 +1,17 @@
+<!--pages/details-menu/details-menu.wxml-->
+<view class="detail-songMenu">
+  
+  <block wx:for="{{songMenuAllCategory}}" wx:key="cat">
+    <view class="header">
+    <section-header title="{{item.cat}}" isShow="false"></section-header>
+  </view>
+    <view class="songMenu">
+      <block wx:for="{{item.playlists}}" wx:key="id">
+        <view class="card" bindtap="onClickSongMenu" data-song-menu-id="{{item.id}}">
+          <image class="img" src="{{item.coverImgUrl}}" mode="widthFix"></image>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>

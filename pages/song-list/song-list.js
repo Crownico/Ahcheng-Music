@@ -1,66 +1,96 @@
 // pages/song-list/song-list.js
+import recommendSong from "../../store/recommendSong";
+import rankSong from "../../store/rankSong"
+import { getRecommendSongReq } from "../../services/music";
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    songsList: [],
+    newRanking: [],
+    originRanking: [],
+    upRanking: [],
+    songMenu: {}
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
-
+    // 展示榜单歌曲列表
+    const {type} = options;
+    switch (type) {
+      case "recommendSong":
+        this.getSongsListFromRecSong()
+        break;
+      case "newRanking":
+        console.log(type);
+        this.getSongsListFromNewRanking()
+        break;
+      case "originRanking":
+        this.getSongsListFromOriginRanking()
+        console.log(type);
+        break;
+      case "upRanking":
+        this.getSongsListFromUpRanking()
+        console.log(type);
+        break;
+      default:
+        break;
+    }
+    // 展示歌单歌曲列表
+    if (options.songMenuId) {
+      this.getSongsListFromSongMenu(options.songMenuId)
+    }
+    
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload() {
-
+    // 退出页面时取消对全局数据的监听
+    recommendSong.offState("recommendSongList", (value) => {
+      this.setData({songsList: value})
+    }),
+    rankSong.offState("newRanking", (value) => {
+      this.setData({newRanking: value.tracks})
+    }),
+    rankSong.offState("originRanking", (value) => {
+      this.setData({originRanking: value.tracks})
+    }),
+    rankSong.offState("upRanking", (value) => {
+      this.setData({upRanking: value.tracks})
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  getSongsListFromRecSong() {
+    wx.setNavigationBarTitle({
+      title: '推荐歌曲',
+    })
+    // 监听全局中所有的推荐歌曲
+    recommendSong.onState("recommendSongList", (value) => {
+      this.setData({songsList: value})
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  getSongsListFromNewRanking() {
+    wx.setNavigationBarTitle({
+      title: '新歌榜',
+    })
+    rankSong.onState("newRanking", (value) => {
+      this.setData({newRanking: value.tracks})
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  getSongsListFromOriginRanking() {
+    wx.setNavigationBarTitle({
+      title: '原创榜',
+    })
+    rankSong.onState("originRanking", (value) => {
+      this.setData({originRanking: value.tracks})
+    })
+  },
+  getSongsListFromUpRanking() {
+    wx.setNavigationBarTitle({
+      title: '飙升榜',
+    })
+    rankSong.onState("upRanking", (value) => {
+      this.setData({upRanking: value.tracks})
+    })
+  },
+  async getSongsListFromSongMenu(id) {
+    const res = await getRecommendSongReq(id);
+    this.setData({songMenu: res.playlist})
   }
+
+  
 })
