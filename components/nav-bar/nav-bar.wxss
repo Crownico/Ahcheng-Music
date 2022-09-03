@@ -1,0 +1,35 @@
+/* components/nav-bar/nav-bar.wxss */
+.nav-bar {
+  color: #fff;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  /* background-color: plum; */
+}
+.nav .left {
+  width: 120rpx;
+  /* background-color: pink; */
+}
+.nav .left .icon {
+  width: 34rpx;
+  padding-left: 20rpx;
+}
+.nav .center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav .right {
+  width: 120rpx;
+}
+
+/* 手动控制插槽默认元素的显隐 */
+.default {
+  display: none;
+}
+.slot:empty + .default {
+  display: flex;
+}

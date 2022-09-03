@@ -94,5 +94,12 @@ Page({
     wx.navigateTo({
       url: `/pages/song-list/song-list?type=${type}`,
     })
+  },
+  // 点击推荐歌曲 
+  onClickSongItem(event) {
+    const id = event.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/music-player/music-player?id=${id}`,
+    })
   }
 })

@@ -11,6 +11,10 @@
   display: flex;
   width: 100%;
 }
+/* 清除滚动条 */
+.song-menu .list ::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
 .card {
   width: 220rpx;
   flex-shrink: 0;

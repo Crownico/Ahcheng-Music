@@ -1,0 +1,162 @@
+/* pages/music-player/music-player.wxss */
+page {
+  box-sizing: border-box;
+  /* padding: 0 60rpx; */
+}
+
+.bg-img, .bg-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.bg-mask {
+  backdrop-filter: blur(20px);
+  background-color: #0004;
+}
+
+/* 导航中间插槽 */
+.center {
+  display: flex;
+  font-size: 28rpx;
+  color: #999;
+}
+.center .divider {
+  padding: 0 10rpx;
+}
+.active {
+  color: #fff;
+}
+
+/* 歌曲页 */
+.content .song {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 60rpx;
+  color: #fff;
+}
+.album {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 55%;
+  /* background-color: red; */
+}
+.album .album-img {
+  /* display: block;
+  margin: 0 auto; */
+  /* padding: 40rpx 0; */
+  width: 80%;
+}
+.info {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 40rpx;
+  /* background-color: pink; */
+}
+.info .name{
+  margin-bottom: 20rpx;
+  font-size: 48rpx;
+  font-weight: 700;
+}
+.info .artist {
+  color: #ddd;
+}
+.content .lrc {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+.content .lrc .text {
+  /* 只显示一行文字并且以...结尾 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.process {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  /* height: 10%; */
+}
+.process .slider {
+  margin: 10rpx;
+  
+}
+.process .time {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10rpx;
+  font-size: 24rpx;
+  color: #ccc;
+}
+.control {
+  flex: 1.5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 40rpx;
+}
+.control .btn {
+  width: 60rpx;
+}
+.control .pause {
+  width: 100rpx;
+}
+.control .mode {
+  width: 80rpx;
+}
+
+/* 歌词页 */
+.lyrics {
+  display: flex;
+  flex-flow: column;
+  /* box-sizing: border-box; */
+}
+/* 隐藏滚动条 */
+.lyrics .lrc-content ::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+.lyrics .lrc-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 75.5%;
+  text-align: center;
+  font-size: 32rpx;
+  padding: 20rpx 0;
+  color: #ccc;
+}
+
+.lyrics .lrc-content .lrc-item {
+  height: 31px;
+  line-height: 31px;
+}
+.lyrics .process, .lyrics .control {
+  box-sizing: border-box;
+  padding-left: 60rpx;
+  padding-right: 60rpx;
+}
+
+.lyrics .lrc-content .active {
+  color: #0f0;
+  font-size: 18px;
+}
+

@@ -1,0 +1,91 @@
+<!--pages/music-player/music-player.wxml-->
+<wxs src="/utils/format.wxs" module="fmt"></wxs>
+
+<image class="bg-img" src="{{currentSong.al.picUrl}}" mode="aspectFill"></image>
+<view class="bg-mask"></view>
+
+<!-- 自定义导航栏 -->
+<nav-bar>
+  <view slot="center" class="center">
+    <view class="song {{currentPage === 0 ? 'active' : ''}}">歌曲</view>
+    <view class="divider">|</view>
+    <view class="lrc {{currentPage === 1 ? 'active' : ''}}">歌词</view>
+  </view>
+</nav-bar>
+
+<!-- 内容 -->
+<view class="content">
+  <swiper bindchange="onPageChange" style="height: {{contentHeight}}px;">
+    <swiper-item class="song">
+      <view class="album">
+        <image class="album-img" src="{{currentSong.al.picUrl}}" mode="widthFix"></image>
+      </view>
+      <view class="info">
+        <view class="name">{{currentSong.name}}</view>
+        <view class="artist">{{currentSong.ar[0].name}}</view>
+      </view>
+      <view class="lrc">
+        <text class="text">{{songLyric[currentLyricIndex].text}}</text>
+      </view>
+      <view class="process">
+        <slider 
+          block-size="12" 
+          class="slider" 
+          value="{{playPercent}}" 
+          bindchanging="onSliderChanging"
+          bindchange="onSliderChanged"
+        ></slider>
+        <view class="time">
+          <view class="current-time">{{fmt.formatTime(currentTime)}}</view>
+          <view class="duration">{{fmt.formatTime(duration)}}</view>
+        </view>
+      </view>
+      <view class="control">
+        <image class="btn mode" src="/assets/images/player/play_random.png" mode="widthFix"></image>
+        <image class="btn pre" src="/assets/images/player/play_prev.png" mode="widthFix"></image>
+        <view bindtap="onPauseOrPlay">
+          <image  class="btn pause" hidden="{{!isPlayOrPause}}" src="/assets/images/player/play_pause.png"   mode="widthFix"></image>
+          <image  hidden="{{isPlayOrPause}}" class="btn pause" src="/assets/images/player/play_resume.png"   mode="widthFix"></image>
+        </view>
+        <image class="btn next" src="/assets/images/player/play_next.png"  mode="widthFix"></image>
+        <image class="btn list" src="/assets/images/player/play_music.png"  mode="widthFix"></image>
+      </view>
+    </swiper-item>
+
+    <!-- 歌词 -->
+    <swiper-item class="lyrics">
+
+      <scroll-view class="lrc-content" scroll-y 	scroll-top="{{lyricScrollTop}}" scroll-with-animation>
+        <block wx:for="{{songLyric}}" wx:key="time">
+          <view class="lrc-item {{index === currentLyricIndex ? 'active': ''}}"
+          style="padding-top: {{index == 0 ? (contentHeight/4): 0}}px; padding-bottom: {{ index == (songLyric.length - 1) ? (contentHeight/2+80): 0 }}px;"
+        >{{item.text}}</view>
+        </block>
+      </scroll-view>
+
+      <view class="process">
+        <slider 
+          block-size="12" 
+          class="slider" 
+          value="{{playPercent}}" 
+          bindchanging="onSliderChanging"
+          bindchange="onSliderChanged"
+        ></slider>
+        <view class="time">
+          <view class="current-time">{{fmt.formatTime(currentTime)}}</view>
+          <view class="duration">{{fmt.formatTime(duration)}}</view>
+        </view>
+      </view>
+      <view class="control">
+        <image class="btn mode" src="/assets/images/player/play_random.png" mode="widthFix"></image>
+        <image class="btn pre" src="/assets/images/player/play_prev.png" mode="widthFix"></image>
+        <view bindtap="onPauseOrPlay">
+          <image  class="btn pause" hidden="{{!isPlayOrPause}}" src="/assets/images/player/play_pause.png"   mode="widthFix"></image>
+          <image  hidden="{{isPlayOrPause}}" class="btn pause" src="/assets/images/player/play_resume.png"   mode="widthFix"></image> 
+        </view>
+        <image class="btn next" src="/assets/images/player/play_next.png"  mode="widthFix"></image>
+        <image class="btn list" src="/assets/images/player/play_music.png"  mode="widthFix"></image>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

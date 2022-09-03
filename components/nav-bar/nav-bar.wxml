@@ -1,0 +1,27 @@
+<!--components/nav-bar/nav-bar.wxml-->
+<view class="nav-bar">
+  <!-- 为状态栏占位 -->
+  <view class="placeHolder" style="height: {{statusHeight}}px;"></view>
+
+  <view class="nav">
+    <view class="left" bindtap="navigateBack">
+      <view class="slot">
+        <slot name="left"></slot>
+      </view>
+      <!-- 插槽默认值 -->
+      <view class="default">
+        <image class="icon" src="/assets/images/icons/arrow-left.png" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="center">
+      <view class="slot">
+        <slot name="center"></slot>
+      </view>
+      <!-- 插槽默认值 -->
+      <view class="default">
+        <view>导航标题</view>
+      </view>
+    </view>
+    <view class="right"></view>
+  </view>
+</view>

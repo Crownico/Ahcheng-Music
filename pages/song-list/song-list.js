@@ -19,16 +19,16 @@ Page({
         this.getSongsListFromRecSong()
         break;
       case "newRanking":
-        console.log(type);
+        // console.log(type);
         this.getSongsListFromNewRanking()
         break;
       case "originRanking":
         this.getSongsListFromOriginRanking()
-        console.log(type);
+        // console.log(type);
         break;
       case "upRanking":
         this.getSongsListFromUpRanking()
-        console.log(type);
+        // console.log(type);
         break;
       default:
         break;
