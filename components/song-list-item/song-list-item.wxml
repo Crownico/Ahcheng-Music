@@ -1,7 +1,12 @@
 <!--components/song-list-item/song-list-item.wxml-->
 <view class="song-list">
   <block wx:for="{{itemData}}" wx:key="id">
-    <view class="song-item">
+    <view 
+      class="song-item" 
+      bindtap="onClickSongItem" 
+      data-id="{{item.id}}" 
+      data-current-play-index="{{index}}"
+      >
       <view class="index">{{index + 1}}</view>
       <view class="song-info">
         <view class="song-name">{{item.name}}</view>

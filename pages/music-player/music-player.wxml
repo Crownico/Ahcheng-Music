@@ -41,14 +41,15 @@
         </view>
       </view>
       <view class="control">
-        <image class="btn mode" src="/assets/images/player/play_random.png" mode="widthFix"></image>
-        <image class="btn pre" src="/assets/images/player/play_prev.png" mode="widthFix"></image>
+        <image class="btn mode" src="/assets/images/player/play_{{playMode}}.png" mode="widthFix" bindtap="onClickChangePlayMode"></image>
+        <image class="btn pre" src="/assets/images/player/play_prev.png" mode="widthFix" bindtap="onClickPreSong"></image>
         <view bindtap="onPauseOrPlay">
-          <image  class="btn pause" hidden="{{!isPlayOrPause}}" src="/assets/images/player/play_pause.png"   mode="widthFix"></image>
-          <image  hidden="{{isPlayOrPause}}" class="btn pause" src="/assets/images/player/play_resume.png"   mode="widthFix"></image>
+          <!-- <image  class="btn pause" hidden="{{!isPlayOrPause}}" src="/assets/images/player/play_pause.png"   mode="widthFix"></image>
+          <image  hidden="{{isPlayOrPause}}" class="btn pause" src="/assets/images/player/play_resume.png"   mode="widthFix"></image> -->
+          <image class="btn pause" src="/assets/images/player/play_{{isPlayOrPause ? 'pause' : 'resume'}}.png"   mode="widthFix"></image>
         </view>
-        <image class="btn next" src="/assets/images/player/play_next.png"  mode="widthFix"></image>
-        <image class="btn list" src="/assets/images/player/play_music.png"  mode="widthFix"></image>
+        <image class="btn next" src="/assets/images/player/play_next.png"  mode="widthFix" bindtap="onClickNextSong"></image>
+        <image class="btn list" src="/assets/images/player/play_music.png"  mode="widthFix" bindtap="onClickPlayList"></image>
       </view>
     </swiper-item>
 
@@ -77,14 +78,15 @@
         </view>
       </view>
       <view class="control">
-        <image class="btn mode" src="/assets/images/player/play_random.png" mode="widthFix"></image>
-        <image class="btn pre" src="/assets/images/player/play_prev.png" mode="widthFix"></image>
+        <image class="btn mode" src="/assets/images/player/play_{{playMode}}.png" mode="widthFix" bindtap="onClickChangePlayMode"></image>
+        <image class="btn pre" src="/assets/images/player/play_prev.png" mode="widthFix" bindtap="onClickPreSong"></image>
         <view bindtap="onPauseOrPlay">
-          <image  class="btn pause" hidden="{{!isPlayOrPause}}" src="/assets/images/player/play_pause.png"   mode="widthFix"></image>
-          <image  hidden="{{isPlayOrPause}}" class="btn pause" src="/assets/images/player/play_resume.png"   mode="widthFix"></image> 
+          <!-- <image  class="btn pause" hidden="{{!isPlayOrPause}}" src="/assets/images/player/play_pause.png"   mode="widthFix"></image>
+          <image  hidden="{{isPlayOrPause}}" class="btn pause" src="/assets/images/player/play_resume.png"   mode="widthFix"></image>  -->
+          <image class="btn pause" src="/assets/images/player/play_{{isPlayOrPause ? 'pause' : 'resume'}}.png"   mode="widthFix"></image>
         </view>
-        <image class="btn next" src="/assets/images/player/play_next.png"  mode="widthFix"></image>
-        <image class="btn list" src="/assets/images/player/play_music.png"  mode="widthFix"></image>
+        <image class="btn next" src="/assets/images/player/play_next.png"  mode="widthFix" bindtap="onClickNextSong"></image>
+        <image class="btn list" src="/assets/images/player/play_music.png"  mode="widthFix" bindtap="onClickPlayList"></image>
       </view>
     </swiper-item>
   </swiper>

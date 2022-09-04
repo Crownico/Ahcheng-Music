@@ -2,9 +2,11 @@
 import recommendSong from "../../store/recommendSong";
 import rankSong from "../../store/rankSong"
 import { getRecommendSongReq } from "../../services/music";
+import playList from "../../store/playList";
 
 Page({
   data: {
+    type: "",
     songsList: [],
     newRanking: [],
     originRanking: [],
@@ -14,6 +16,7 @@ Page({
   onLoad(options) {
     // 展示榜单歌曲列表
     const {type} = options;
+    this.data.type = type;
     switch (type) {
       case "recommendSong":
         this.getSongsListFromRecSong()
@@ -90,7 +93,27 @@ Page({
   async getSongsListFromSongMenu(id) {
     const res = await getRecommendSongReq(id);
     this.setData({songMenu: res.playlist})
-  }
+  },
 
+  // 列表页点击了任何歌曲
+  onClickSongList() {
+    playList.setState("currentPlayList", "")
+    switch (this.data.type) {
+      case "recommendSong":        
+          playList.setState("currentPlayList", this.data.songsList)
+        break;
+      case "newRanking":
+        playList.setState("currentPlayList", this.data.newRanking)
+        break;
+      case "originRanking":
+        playList.setState("currentPlayList", this.data.originRanking)
+        break;
+      case "upRanking":
+        playList.setState("currentPlayList", this.data.upRanking)
+        break;
+      default:
+        break;
+    }
+  }
   
 })

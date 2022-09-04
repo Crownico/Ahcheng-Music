@@ -38,9 +38,8 @@
 }
 
 .video-info .title{
-  
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: 625;
 }
 .video-info .artistName {
   position: absolute;
@@ -51,7 +50,7 @@
 .play-info {
   position: absolute;
   bottom: 0;
-  font-size: 20rpx;
+  font-size: 22rpx;
   color: #0008;
 }
 

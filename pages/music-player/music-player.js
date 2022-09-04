@@ -1,6 +1,7 @@
 import { getSongItemDetailReq, getSongLyricReq } from "../../services/play";
 import { throttle } from "underscore";
 import { parseLyric } from "../../utils/parse-lyric";
+import playList from "../../store/playList";
 
 const app = getApp()
 // 播放器上下文
@@ -22,12 +23,34 @@ Page({
 
     isSlider: false, // 自动播放在控制进度条，拖动播放时也在控制进度条，起冲突导致反复横跳
     isWaiting: true, // 跳转播放后延迟监听进度更新
-    isPlayOrPause: true
+    isPlayOrPause: true,
+
+    currentPlayList: [], // 播放列表
+    currentPlaySongId: 0,
+    currentPlayIndex: 0,
+
+    playModeNum: 0, // 0 顺序播放 1 循环播放 2 随机播放
+    playMode: "order"
   },
   onLoad(options) {
     // 0. 获取内容高度
     this.setData({contentHeight: app.globalData.contentHeight})
     const songItemId = options.id;
+    this.data.currentPlaySongId = songItemId
+    this.play(songItemId)
+    
+     // 获取播放列表和当前播放歌曲索引
+     playList.onState("currentPlayList", value => this.data.currentPlayList = value)
+     playList.onState("currentPlayIndex", value => this.data.currentPlayIndex = value)
+
+     // 自动播放下一首
+    this.playControl()
+  },
+  onUnload() {
+    playList.onState("currentPlayList", value => this.data.currentPlayList = value)
+    playList.onState("currentPlayIndex", value => this.data.currentPlayIndex = value)
+  },
+  play(songItemId) {
     // 1. 请求歌曲详细信息
     this.getSongDetail(songItemId)
     // 2. 请求歌曲的歌词
@@ -40,6 +63,7 @@ Page({
     setTimeout(() => {audioContext.play()}, 800)
     // 3.1 自动播放进度控制
     this.playProcessControl(audioContext)
+   
   },
   async getSongDetail(ids) {
     const res = await getSongItemDetailReq(ids)
@@ -71,7 +95,7 @@ Page({
         const currentindex = lrc.findIndex((item) => {
           return item.time > audioContext.currentTime * 1000
         })
-        if(audioContext.currentTime * 1000 > lrc[lrc.length - 1].time) {
+        if(audioContext.currentTime * 1000 > lrc[lrc.length - 1]?.time) {
           this.setData({currentLyricIndex: lrc.length - 1})
         } else {
           this.setData({currentLyricIndex: currentindex - 1})
@@ -116,8 +140,10 @@ Page({
     // audioContext.currentTime = (sliderPercent / 100) * this.data.duration
     const sliderToPlayOfTime = (sliderPercent / 100) * this.data.duration
     audioContext.seek(sliderToPlayOfTime / 1000) // seek 方法单位为 秒
-    this.setData({currentTime: sliderToPlayOfTime})
+    this.setData({currentTime: sliderToPlayOfTime, isPlayOrPause: true})
     this.data.isSlider = false
+
+    
   },
   // 点击播放或暂停
   onPauseOrPlay() {
@@ -128,11 +154,98 @@ Page({
     }
     this.setData({isPlayOrPause: !this.data.isPlayOrPause})
   },
+  // 点击播放列表
+  onClickPlayList() {
+    wx.navigateTo({
+      url: '/pages/play-list/play-list',
+    })
+  },
+  // 切换播放模式
+  onClickChangePlayMode() {
+    let temp = this.data.playModeNum
+    temp += 1
+    if(temp === 3) temp = 0
+    this.data.playModeNum = temp
+
+    const modeArr = ["order", "repeat", "random"]
+    this.setData({playMode: modeArr[temp]})
+    switch (temp) {
+      case 0:
+        this.playControl()
+        break;
+      case 1:
+        this.playControl("loop")
+        break;
+      case 2:
+        this.playControl("random")
+        break;
+      default:
+        break;
+    }
+  },
+  // 上一首
+  onClickPreSong() {
+    this.playControl("pre")
+  },
+  // 下一首
+  onClickNextSong() {
+    this.playControl("next")
+  },
+  // 播放控制函数
+  playControl(controlSignal) {
+    const currentPlayList = this.data.currentPlayList
+    let index = this.data.currentPlayIndex
+    const len = currentPlayList.length
+    switch (controlSignal) {
+      case "pre":
+        if (index > 0) {
+          this.data.currentPlaySongId = currentPlayList[index - 1].id
+          index = index - 1
+        } else {
+          index = currentPlayList.length - 1
+          this.data.currentPlaySongId = currentPlayList[index].id
+        }
+        break;
+      case "next":
+        if (index < currentPlayList.length - 1) {
+          this.data.currentPlaySongId = currentPlayList[index + 1].id
+          index = index + 1
+        } else {
+          index = 0
+          this.data.currentPlaySongId = currentPlayList[0].id
+        }
+        break;
+      case "random":
+
+        audioContext.offEnded()
+        audioContext.onEnded(() => {
+          index = Math.floor(Math.random()*(len));
+          this.data.currentPlaySongId = currentPlayList[index].id
+          this.play(this.data.currentPlaySongId)
+          playList.setState("currentPlayIndex", index)
+        })
+        return;
+        break;
+      case "loop":
+        audioContext.offEnded()
+        audioContext.onEnded(() => {
+          this.data.currentPlaySongId = currentPlayList[index].id
+          this.play(this.data.currentPlaySongId)
+        })
+        return;
+        break;
+      default:
+        audioContext.onEnded(() => {
+          this.playControl("next")
+        })
+        return;
+        break;
+    }
+    this.setData({isPlayOrPause: true})
+    this.play(this.data.currentPlaySongId)
+    playList.setState("currentPlayIndex", index)
+  },
   
-
-
-
-
   // 获取轮播图的当前页
   onPageChange(event) {
     this.setData({currentPage: event.detail.current})

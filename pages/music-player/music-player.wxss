@@ -148,6 +148,7 @@ page {
 .lyrics .lrc-content .lrc-item {
   height: 31px;
   line-height: 31px;
+  overflow: hidden;
 }
 .lyrics .process, .lyrics .control {
   box-sizing: border-box;

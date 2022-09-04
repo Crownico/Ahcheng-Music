@@ -22,7 +22,7 @@
 }
 .song-info .song-name {
   font-size: 32rpx;
-  font-weight: 550;
+  font-weight: 625;
   color: #555;
 }
 .song-info .artist {

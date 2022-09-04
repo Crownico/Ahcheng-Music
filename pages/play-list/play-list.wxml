@@ -1,0 +1,3 @@
+<!--pages/play-list/play-list.wxml-->
+<!-- 播放列表 -->
+<song-list-item itemData="{{currentPlayList}}"></song-list-item>

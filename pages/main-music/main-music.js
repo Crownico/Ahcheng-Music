@@ -2,6 +2,7 @@ import { getMusicBannerReq, getRecommendSongReq, getSongMenuListReq } from "../.
 import {querySelect} from "../../utils/element-computed"
 import recommendSong  from "../../store/recommendSong";
 import rankSong from "../../store/rankSong";
+import playList from "../../store/playList";
 
 Page({
   data: {
@@ -98,8 +99,15 @@ Page({
   // 点击推荐歌曲 
   onClickSongItem(event) {
     const id = event.currentTarget.dataset.id;
+    // 1. 跳转到播放页
     wx.navigateTo({
       url: `/pages/music-player/music-player?id=${id}`,
     })
+    // 2. 将歌曲所在的列表数据添加到播放列表中
+    playList.setState("currentPlayList", this.data.songList)
+ 
+    // 3. 保存当前播放索引
+    const currentPlayIndex = event.currentTarget.dataset.currentPlayIndex;
+    playList.setState("currentPlayIndex", currentPlayIndex)
   }
 })

@@ -1,9 +1,9 @@
 <!--pages/song-list/song-list.wxml-->
 <!-- 歌曲列表 -->
-<song-list-item itemData="{{songsList}}" wx:if="{{songsList.length}}"></song-list-item>
-<song-list-item itemData="{{newRanking}}" wx:if="{{newRanking.length}}"></song-list-item>
-<song-list-item itemData="{{originRanking}}" wx:if="{{originRanking.length}}"></song-list-item>
-<song-list-item itemData="{{upRanking}}" wx:if="{{upRanking.length}}"></song-list-item>
+<song-list-item itemData="{{songsList}}" wx:if="{{songsList.length}}" bindtap="onClickSongList"></song-list-item>
+<song-list-item itemData="{{newRanking}}" wx:if="{{newRanking.length}}" bindtap="onClickSongList"></song-list-item>
+<song-list-item itemData="{{originRanking}}" wx:if="{{originRanking.length}}" bindtap="onClickSongList"></song-list-item>
+<song-list-item itemData="{{upRanking}}" wx:if="{{upRanking.length}}" bindtap="onClickSongList"></song-list-item>
 <view wx:if="{{songsList.length}}">hhh</view>
 <!-- 歌单歌曲列表 -->
 <view class="song-menu">

@@ -28,15 +28,20 @@
   </section-header>
   <view class="recommend-song">
     <block wx:for="{{songList}}" wx:key="id">
-      <song-item songItem="{{item}}" bindtap="onClickSongItem" data-id="{{item.id}}"></song-item>
+      <song-item 
+        songItem="{{item}}" 
+        bindtap="onClickSongItem" 
+        data-id="{{item.id}}" 
+        data-current-play-index="{{index}}"
+      ></song-item>
     </block>
   </view>
 </view>
 
 <!-- 热门歌单 -->
-<view class="recommend-songMenu">
+<!-- <view class="recommend-songMenu">
   <section-songMenu title="热门歌单" songMenu="{{songMenuData}}" bind:moreMenuClick="onMoreMenuClick"></section-songMenu>
-</view>
+</view> -->
 
 <!-- 推荐歌单 -->
 <!-- <view class="hot-songMenu">
@@ -44,7 +49,7 @@
 </view> -->
 
 <!-- 巅峰榜 -->
-<!-- <view class="rank">
+<view class="rank">
   <view class="rank-title">
     <section-header  title="巅峰榜" bindtap="onMoreClick" isShow="false">
     </section-header>
@@ -52,4 +57,4 @@
   <block wx:for="{{rankSongObj}}" wx:key="id" >
     <rank-song itemData="{{item}}" data-index="{{index}}" bindtap="onClickRank"></rank-song>
   </block>
-</view> -->
+</view>

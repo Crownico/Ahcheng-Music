@@ -7,7 +7,7 @@
       <view class="song-item" bindtap="onClickRank">
         <image class="song-img" src="{{item.al.picUrl}}" mode="widthFix"></image>
         <view class="song-info">
-          <text class="index">{{index+1}} </text>
+          <text class="index">{{index+1}}</text>
           <text class="song-name">{{item.name}} </text>
           <text class="artist">- {{item.ar[0].name}} </text>
         </view>
