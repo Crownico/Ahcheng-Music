@@ -114,6 +114,9 @@ Page({
       default:
         break;
     }
+  },
+  onClickSongListOfSongMenu() {
+    playList.setState("currentPlayList", this.data.songMenu.tracks)
   }
   
 })

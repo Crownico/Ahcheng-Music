@@ -5,7 +5,8 @@
 <song-list-item itemData="{{originRanking}}" wx:if="{{originRanking.length}}" bindtap="onClickSongList"></song-list-item>
 <song-list-item itemData="{{upRanking}}" wx:if="{{upRanking.length}}" bindtap="onClickSongList"></song-list-item>
 <view wx:if="{{songsList.length}}">hhh</view>
-<!-- 歌单歌曲列表 -->
+
+<!-- 歌单信息 -->
 <view class="song-menu">
   <view class="song-menu-info">
     <image class="img" src="{{songMenu.coverImgUrl}}" mode="widthFix"></image>
@@ -21,4 +22,5 @@
   <image class="bg-img" src="{{songMenu.coverImgUrl}}" mode="aspectFill"></image>
   <view class="mask"></view>
 </view>
-<song-list-item itemData="{{songMenu.tracks}}"></song-list-item>
+<!-- 歌单歌曲列表 -->
+<song-list-item itemData="{{songMenu.tracks}}" bindtap="onClickSongListOfSongMenu"></song-list-item>

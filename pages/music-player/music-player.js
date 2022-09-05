@@ -118,7 +118,7 @@ Page({
     this.setData({playPercent: percent, currentTime: currentTime * 1000})
   },
   // 监听滑块拖动的过程
-  onSliderChanging(event) {
+  onSliderChanging: throttle(function(event) {
     // 拖动滑块时，撤销自动播放对进度条的控制，防止拖动反复横跳
     this.data.isSlider = true
     // 拖动时的百分比计算出歌曲时刻
@@ -126,7 +126,7 @@ Page({
     const sliderTime = (sliderPercent / 100) * this.data.duration
     // 播放歌曲时刻带动下方时间变化
     this.setData({currentTime: sliderTime})
-  },
+  }, 200),
   // 监听滑块拖动后的结果
   onSliderChanged(event) {
     // console.log("点击了滑块");
