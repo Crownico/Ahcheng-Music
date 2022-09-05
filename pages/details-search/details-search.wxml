@@ -1,2 +1,33 @@
 <!--pages/details-search/details-search.wxml-->
-<text>pages/details-search/details-search.wxml</text>
+<van-search
+  shape="round"
+  placeholder="请输入搜索关键词"
+  clearable
+  bind:change="onInputHandle"
+  value="{{inputValue}}"
+  ></van-search>
+<!-- <view wx:if="{{true}}">hhh</view> -->
+<!-- 搜索建议 -->
+<view class="search-suggestion" wx:if="{{!!inputValue.length && isShow && !searchResult.length}}">
+  <view class="header" bindtap="onClickSearch" data-keyword="{{inputValue}}">搜索："<text class="search-keyword">{{inputValue}}</text>"</view>
+  <block wx:for="{{searchSuggestion}}" wx:key="id">
+    <view class="suggestion" bindtap="onClickSearch" data-keyword="{{item.keyword}}"><van-icon name="search" /> {{item.keyword}}</view>
+  </block>
+</view>
+
+<!-- 热门搜索 -->
+<view class="hotSearch" wx:elif="{{!inputValue.length}}">
+  <section-header title="热门搜索" isShow="false"></section-header>
+  <view class="keyword">
+    <block wx:for="{{hotSearch}}" wx:key="first">
+      <view class="item" bindtap="onClickSearch" data-keyword="{{item.first}}">{{item.first}}</view>
+    </block>
+  </view>
+</view>
+
+<!-- 搜索结果 -->
+<view class="search-result" wx:if="{{!!searchResult.length}}">
+  <view class="result-header">搜索结果："<text class="search-keyword">{{inputValue}}</text>"</view>
+    <song-list-item itemData="{{searchResult}}" bindtap="onClickSongList"></song-list-item>
+</view>
+

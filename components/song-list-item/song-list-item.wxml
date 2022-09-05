@@ -11,6 +11,7 @@
       <view class="song-info">
         <view class="song-name">{{item.name}}</view>
         <view class="artist">{{item.ar[0].name}}</view>
+        <view class="artist">{{item.artists[0].name}}</view>
       </view>
     </view>
   </block>

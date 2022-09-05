@@ -1,66 +1,56 @@
+import { debounce, throttle } from "underscore"
+import { getHotRearchReq, getSearchresultReq, getSearchSuggestionReq } from "../../services/search"
+import playList from "../../store/playList"
+
 // pages/details-search/details-search.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    hotSearch: [],
+    inputValue: "",
+    searchSuggestion: [],
+    searchResult: [],
 
+    isShow: false,
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
+    // 0. 获取热门搜索结果
+    this.getHotRearch()
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  async getHotRearch() {
+    const res = await getHotRearchReq()
+    this.setData({hotSearch: res.result.hots})
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
+  // 防抖获取输入结果
+  onInputHandle: debounce(function (event) {
+   this.setData({inputValue: event.detail, isShow: true, searchResult: []})
+   this.getSearchSuggestion(event.detail)
+  }, 200),
+  // 搜索建议
+  async getSearchSuggestion(keyword) {
+    const res = await getSearchSuggestionReq(keyword)
+    const allMatch = res?.result?.allMatch
+    const searchSuggestion = allMatch !== undefined ? allMatch : []
+    this.setData({searchSuggestion})
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  // 监听点击获取关键字进行搜索
+  onClickSearch(event) {
+    const keyword = event.currentTarget.dataset.keyword;
+    this.setData({inputValue: keyword})
+    this.getSearchResult(keyword)
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  // 请求搜索结果
+  async getSearchResult(keyword) {
+    const res = await getSearchresultReq(keyword)
+    this.setData({searchResult: res.result.songs})
+  },
+  // 监听点击搜索结果列表
+  onClickSongList() {
+    playList.setState("currentPlayList", this.data.searchResult)
+  },
   onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+    this.data.isShow = false;
+    this.data.inputValue = "";
+    this.data.searchResult = []
   }
 })
