@@ -28,6 +28,6 @@
 <!-- 搜索结果 -->
 <view class="search-result" wx:if="{{!!searchResult.length}}">
   <view class="result-header">搜索结果："<text class="search-keyword">{{inputValue}}</text>"</view>
-    <song-list-item itemData="{{searchResult}}" bindtap="onClickSongList"></song-list-item>
+  <song-list-item itemData="{{searchResult}}" bindtap="onClickSongList"></song-list-item>
 </view>
 

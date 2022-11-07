@@ -14,7 +14,7 @@ Page({
     songMenu: {}
   },
   onLoad(options) {
-    // 展示榜单歌曲列表
+    // 1.展示榜单歌曲列表
     const {type} = options;
     this.data.type = type;
     switch (type) {
@@ -36,7 +36,7 @@ Page({
       default:
         break;
     }
-    // 展示歌单歌曲列表
+    // 2.展示歌单歌曲列表
     if (options.songMenuId) {
       this.getSongsListFromSongMenu(options.songMenuId)
     }

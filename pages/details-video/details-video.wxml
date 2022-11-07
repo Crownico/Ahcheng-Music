@@ -14,7 +14,7 @@
 
   <view class="recommend-mv">
   <block wx:for="{{relatedMV}}" wx:key="vid">
-      <recommend-video remdvideoItem="{{item}}"></recommend-video>
+      <recommend-video remdvideoItem="{{item}}" bindtap="onClickRecMV"></recommend-video>
     </block>
   </view>
 </view>

@@ -29,3 +29,11 @@
   font-size: 26rpx;
   color: #999;
 }
+/* 无版权 */
+.no-copyright {
+  color: #aaa !important;
+}
+/* 正在播放 */
+.isPlaying {
+  color: #0d0 !important;
+}

@@ -1,13 +1,13 @@
 <!--pages/song-list/song-list.wxml-->
 <!-- 歌曲列表 -->
-<song-list-item itemData="{{songsList}}" wx:if="{{songsList.length}}" bindtap="onClickSongList"></song-list-item>
-<song-list-item itemData="{{newRanking}}" wx:if="{{newRanking.length}}" bindtap="onClickSongList"></song-list-item>
-<song-list-item itemData="{{originRanking}}" wx:if="{{originRanking.length}}" bindtap="onClickSongList"></song-list-item>
-<song-list-item itemData="{{upRanking}}" wx:if="{{upRanking.length}}" bindtap="onClickSongList"></song-list-item>
-<view wx:if="{{songsList.length}}">hhh</view>
+<song-list-item itemData="{{songsList}}" wx:if="{{songsList.length}}" bindtap="onClickSongList" currentPlayIndex="9999"></song-list-item>
+<song-list-item itemData="{{newRanking}}" wx:if="{{newRanking.length}}" bindtap="onClickSongList" currentPlayIndex="9999"></song-list-item>
+<song-list-item itemData="{{originRanking}}" wx:if="{{originRanking.length}}" bindtap="onClickSongList" currentPlayIndex="9999"></song-list-item>
+<song-list-item itemData="{{upRanking}}" wx:if="{{upRanking.length}}" bindtap="onClickSongList" currentPlayIndex="9999"></song-list-item>
+<!-- <view wx:if="{{songsList.length}}">hhh</view> -->
 
 <!-- 歌单信息 -->
-<view class="song-menu">
+<view class="song-menu" wx:if="{{songMenu.coverImgUrl}}">
   <view class="song-menu-info">
     <image class="img" src="{{songMenu.coverImgUrl}}" mode="widthFix"></image>
     <view class="right">
@@ -23,4 +23,4 @@
   <view class="mask"></view>
 </view>
 <!-- 歌单歌曲列表 -->
-<song-list-item itemData="{{songMenu.tracks}}" bindtap="onClickSongListOfSongMenu"></song-list-item>
+<song-list-item itemData="{{songMenu.tracks}}" bindtap="onClickSongListOfSongMenu" currentPlayIndex="9999"></song-list-item>

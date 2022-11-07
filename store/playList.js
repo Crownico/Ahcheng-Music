@@ -3,7 +3,7 @@ import { HYEventStore } from "hy-event-store";
 
 const playList = new HYEventStore({
   state: {
-    currentPlayIndex: 0,
+    currentPlayIndex: 9999,
     currentPlayList: []
   },
   actions: {

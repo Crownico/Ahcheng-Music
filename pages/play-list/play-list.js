@@ -4,7 +4,7 @@ import playList from "../../store/playList"
 Page({
 
   data: {
-    currentPlayIndex: 0,
+    currentPlayIndex: 9999,
     currentPlayList: []
   },
   onLoad(options) {
@@ -17,5 +17,6 @@ Page({
   onUnload() {
     playList.offState("currentPlayIndex", value => this.setData({currentPlayIndex: value}))
     playList.offState("currentPlayList", value => this.setData({currentPlayList: value}))
+    this.data.currentPlayIndex = 9999;
   },
 })

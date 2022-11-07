@@ -49,13 +49,15 @@ Page({
   onUnload() {
     playList.onState("currentPlayList", value => this.data.currentPlayList = value)
     playList.onState("currentPlayIndex", value => this.data.currentPlayIndex = value)
+    audioContext.pause()
   },
   play(songItemId) {
     // 1. 请求歌曲详细信息
     this.getSongDetail(songItemId)
+    
     // 2. 请求歌曲的歌词
     this.getSongLyric(songItemId)
-    
+
     // 3. 播放
     audioContext.src = `https://music.163.com/song/media/outer/url?id=${songItemId}.mp3`
     // audioContext.autoplay = true
@@ -71,6 +73,15 @@ Page({
 
     // 获取歌曲总时长
     this.setData({duration: res.songs[0].dt})
+
+    // 判断歌曲会员
+    if(this.data.currentSong.fee === 1) {
+      wx.showToast({
+        title: '会员歌曲',
+        icon: 'error',
+        duration: 3000
+      })
+    }
   },
   async getSongLyric(id) {
     const res = await getSongLyricReq(id)

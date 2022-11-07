@@ -9,7 +9,7 @@
       >
       <view class="index">{{index + 1}}</view>
       <view class="song-info">
-        <view class="song-name">{{item.name}}</view>
+        <view class="song-name {{ item.noCopyrightRcmd }} {{currentPlayIndex === index ? 'isPlaying' : ''}}">{{item.name}}</view>
         <view class="artist">{{item.ar[0].name}}</view>
         <view class="artist">{{item.artists[0].name}}</view>
       </view>

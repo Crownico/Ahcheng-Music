@@ -15,6 +15,7 @@ App({
         this.globalData.statusHeight = res.statusBarHeight // 状态栏
         this.globalData.contentHeight = res.screenHeight - res.statusBarHeight - 44 // 导航栏
       },
-    })
+    }),
+    wx.cloud.init()
   }
 })

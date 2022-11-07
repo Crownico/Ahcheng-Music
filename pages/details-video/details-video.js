@@ -16,7 +16,9 @@ Page({
     this.getMVInfo(this.data.id)
     // 3. 获取关联 mv
     this.getRelatedMV(this.data.id)
-  
+    wx.setNavigationBarTitle({
+      title: '视频详情',
+    })
   },
   async getMVUrl(id) {
     const res = await getMVUrlRequest(id);
@@ -41,39 +43,17 @@ Page({
   onReady() {
     this.getRelatedMV(this.data.id)
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  // 点击推荐视频
+  onClickRecMV(event) {
+    // const id = event.currentTarget.dataset.id;
+    // wx.navigateTo({
+    //   url: `/pages/details-video/details-video?id=${id}`,
+    // })
+    wx.showToast({
+      title: '接口炸啦!',
+      icon: 'none',
+      mask: true,
+      duration: 2000
+    })
   }
 })

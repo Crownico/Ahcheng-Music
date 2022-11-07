@@ -37,3 +37,10 @@ export function getSongMenuTagReq() {
     url: "/playlist/hot"
   })
 }
+
+// 判断歌曲版权
+export function checkMusicReq(id) {
+  return ddRequest.get({
+    url: `/check/music?id=${id}`
+  })
+}

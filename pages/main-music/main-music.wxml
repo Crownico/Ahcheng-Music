@@ -1,4 +1,4 @@
-<!--pages/main-music/main-music.wxml-->
+<!-- pages/main-music/main-music.wxml -->
 <van-search
   shape="round"
   disabled
@@ -51,7 +51,7 @@
 <!-- 巅峰榜 -->
 <view class="rank">
   <view class="rank-title">
-    <section-header  title="巅峰榜" bindtap="onMoreClick" isShow="false">
+    <section-header  title="巅峰榜" isShow="false">
     </section-header>
   </view>
   <block wx:for="{{rankSongObj}}" wx:key="id" >
